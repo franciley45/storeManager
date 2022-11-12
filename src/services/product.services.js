@@ -5,7 +5,7 @@ const getProduct = async () => {
   return { type: null, message: result };
 };
 
-const getProductById = async (id) => {
+const getProductByIdServices = async (id) => {
   const result = await productModel.getProductById(id);
 
   if (!result) return { type: 404, message: 'Product not found' };
@@ -15,5 +15,5 @@ const getProductById = async (id) => {
 
 module.exports = {
   getProduct,
-  getProductById,
+  getProductByIdServices,
 };
