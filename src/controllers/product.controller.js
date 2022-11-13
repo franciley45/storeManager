@@ -1,4 +1,3 @@
-
 const productService = require('../services/product.services');
 
 const getProductController = async (_req, res) => {
@@ -27,10 +26,8 @@ const newProductController = async (req, res) => {
   res.status(201).json(message);
 };
 
-
 module.exports = {
   getProductController,
   getProductByIdController,
-  newProductController,
   newProductController,
 };
