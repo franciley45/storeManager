@@ -1,19 +1,17 @@
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-chai.use(sinonChai)
-
+const chai = require('chai');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
+chai.use(sinonChai);
 
-const productController = require('../../../src/controllers/product.controller')
-const productModel = require('../../../src/models/product.model')
 const productService = require('../../../src/services/product.services');
-const { productsList, productById } = require('../mocks/product.model.mocks')
+const productController = require('../../../src/controllers/product.controller');
 
+const { productsList, productById } = require('../mocks/product.model.mocks');
 
-describe('produto controller ', function () {
-  it('busca uma lista de produtos', async function () {
+describe('produto Controller', function () {
+  it('busca todos produtos', async function () {
     sinon.stub(productService, 'getProduct').resolves({ type: null, message: productsList });
 
     const req = {};
@@ -26,21 +24,37 @@ describe('produto controller ', function () {
 
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(productsList);
-  sinon.restore()
   });
- 
-  it('Se retorna um erro caso o get não de certo', async function () {
-    sinon.stub(productService, 'getProduct').resolves({ type: 500, message: 'not found!' });
 
-    const req = {};
+  it('buaca produto pelo Id', async function () {
+    sinon.stub(productService, 'getProductByIdServices').resolves({ type: null, message: productById });
+
+    const req = { params: { id: 1 } };
 
     const res = {};
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
 
-    await productController.getProductController(req, res);
+    await productController.getProductByIdController(req, res);
 
-    expect(res.status).to.have.been.calledWith(500);
-    expect(res.json).to.have.been.calledWith({ message: 'not found!' });
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productById);
   });
-})
+
+  it('busca por id em caso de error', async function () {
+    sinon.stub(productService, 'getProductByIdServices').resolves({ type: 404, message: 'Product not found' });
+
+    const req = { params: { id: 1 } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.getProductByIdController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  afterEach(sinon.restore);
+});
