@@ -5,7 +5,7 @@ const productService = require('../../../src/services/product.services');
 
 const { productsList, productById } = require('../mocks/product.model.mocks');
 
-describe('tabela produtos', function () {
+describe('produto Services', function () {
   it('Recuperando a lista de produtos', async function () {
     stub(productModel, 'getAllProducts').resolves(productsList);
     const response = { type: null, message: productsList }

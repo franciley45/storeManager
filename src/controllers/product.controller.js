@@ -1,3 +1,4 @@
+
 const productService = require('../services/product.services');
 
 const getProductController = async (_req, res) => {
@@ -16,7 +17,20 @@ const getProductByIdController = async (req, res) => {
   return res.status(200).json(message);
 };
 
+const newProductController = async (req, res) => {
+  const { name } = req.body;
+
+  const { type, message } = await productService.newProductServices(name);
+
+  if (type) return res.status(type).json({ message });
+
+  res.status(201).json(message);
+};
+
+
 module.exports = {
   getProductController,
   getProductByIdController,
+  newProductController,
+  newProductController,
 };
