@@ -33,7 +33,7 @@ describe('product Model', function () {
 
       it('busca produto por id retorna o object esperado', async function () {
         const response = await productModel.getProductById(1)
-        expect(response).to.deep.equal({ id: 1, name: 'Martelo de Thor' })
+        expect(response).to.deep.equal({ id: 1, name: 'Martelo de Thor' });
       })
     })
     
