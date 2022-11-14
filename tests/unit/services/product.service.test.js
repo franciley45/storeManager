@@ -27,6 +27,12 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(response);
   });
 
+  it('retorno ao adicionar produto', async function () {
+    stub(productModel, 'newProduct').resolves({ id: 10, name:'deus'});
+    const result = await productService.newProductServices('deus');
+    expect(result).to.be.deep.equal({ type: null, message: { id: 10, name: 'deus' } });
+  });
+
   afterEach(restore);
 });
 
