@@ -17,7 +17,10 @@ const productByIdServices = {
   "name": "Martelo de Thor"
 };
 
+const newProductmock = { id: 10, name:'deus'}
+
 module.exports = {
   productsListServices,
   productByIdServices,
+  newProductmock,
 }

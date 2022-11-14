@@ -3,7 +3,7 @@ const { stub, restore } = require('sinon');
 const productModel = require('../../../src/models/product.model');
 const productService = require('../../../src/services/product.services');
 
-const { productsListServices, productByIdServices } = require('./mocks/product.services.mocks');
+const { productsListServices, productByIdServices, newProductmock } = require('./mocks/product.services.mocks');
 
 describe('produto Services', function () {
   it('Recuperando a lista de produtos', async function () {
@@ -28,9 +28,10 @@ describe('produto Services', function () {
   });
 
   it('retorno ao adicionar produto', async function () {
-    stub(productModel, 'newProduct').resolves({ id: 10, name:'deus'});
-    const result = await productService.newProductServices('deus');
-    expect(result).to.be.deep.equal({ type: null, message: { id: 10, name: 'deus' } });
+    stub(productModel, 'newProduct').resolves(newProductmock);
+    const response = { type: null, message: newProductmock }
+    const result = await productService.newProductServices(newProductmock.name);
+    expect(result).to.be.deep.equal(response);
   });
 
   afterEach(restore);

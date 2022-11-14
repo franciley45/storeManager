@@ -26,7 +26,7 @@ describe('produto Controller', function () {
     expect(res.json).to.have.been.calledWith(productsListController);
   });
 
-  it('buaca produto pelo Id', async function () {
+  it('busca produto pelo Id', async function () {
     sinon.stub(productService, 'getProductByIdServices').resolves({ type: null, message: productByIdController });
 
     const req = { params: { id: 1 } };
@@ -54,6 +54,36 @@ describe('produto Controller', function () {
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  it('adicionar novo produto retorno', async function () {
+    sinon.stub(productService, 'newProductServices').resolves({ type: null, message: productByIdController });
+
+    const req = { body: { name: "Martelo de Thor" } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.newProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(productByIdController);
+  });
+
+  it('retorno de error caso ao adicionar produto de falha', async function () {
+    sinon.stub(productService, 'newProductServices').resolves({ type: 404, message: 'error to add product' });
+
+    const req = { body: { name: "Martelo de Thor" } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.newProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'error to add product' });
   });
 
   afterEach(sinon.restore);
