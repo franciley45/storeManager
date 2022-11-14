@@ -8,11 +8,11 @@ chai.use(sinonChai);
 const productService = require('../../../src/services/product.services');
 const productController = require('../../../src/controllers/product.controller');
 
-const { productsList, productById } = require('../mocks/product.model.mocks');
+const { productsListController, productByIdController } = require('./mocks/product.controller.mocks');
 
 describe('produto Controller', function () {
   it('busca todos produtos', async function () {
-    sinon.stub(productService, 'getProduct').resolves({ type: null, message: productsList });
+    sinon.stub(productService, 'getProduct').resolves({ type: null, message: productsListController });
 
     const req = {};
 
@@ -23,11 +23,11 @@ describe('produto Controller', function () {
     await productController.getProductController(req, res);
 
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(productsList);
+    expect(res.json).to.have.been.calledWith(productsListController);
   });
 
   it('buaca produto pelo Id', async function () {
-    sinon.stub(productService, 'getProductByIdServices').resolves({ type: null, message: productById });
+    sinon.stub(productService, 'getProductByIdServices').resolves({ type: null, message: productByIdController });
 
     const req = { params: { id: 1 } };
 
@@ -38,7 +38,7 @@ describe('produto Controller', function () {
     await productController.getProductByIdController(req, res);
 
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(productById);
+    expect(res.json).to.have.been.calledWith(productByIdController);
   });
 
   it('busca por id em caso de error', async function () {

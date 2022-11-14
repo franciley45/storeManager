@@ -3,19 +3,19 @@ const { stub, restore } = require('sinon');
 const productModel = require('../../../src/models/product.model');
 const productService = require('../../../src/services/product.services');
 
-const { productsList, productById } = require('../mocks/product.model.mocks');
+const { productsListServices, productByIdServices } = require('./mocks/product.services.mocks');
 
 describe('produto Services', function () {
   it('Recuperando a lista de produtos', async function () {
-    stub(productModel, 'getAllProducts').resolves(productsList);
-    const response = { type: null, message: productsList }
+    stub(productModel, 'getAllProducts').resolves(productsListServices);
+    const response = { type: null, message: productsListServices }
     const result = await productService.getProduct();
     expect(result).to.be.deep.equal(response);
   });
 
   it('busca um produto pelo Id', async function () {
-    stub(productModel, 'getProductById').resolves(productById);
-    const response = { type: null, message: productById }
+    stub(productModel, 'getProductById').resolves(productByIdServices);
+    const response = { type: null, message: productByIdServices }
     const result = await productService.getProductByIdServices(1);
     expect(result).to.be.deep.equal(response);
   });

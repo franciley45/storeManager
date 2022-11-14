@@ -20,6 +20,7 @@ const newProduct = async (name) => {
     'INSERT INTO products (name) VALUE (?)',
     [name],
   );
+  console.log({ id: insertId, name });
   return { id: insertId, name };
 };
 

@@ -15,7 +15,7 @@ const getProductByIdServices = async (id) => {
 
 const newProductServices = async (name) => {
   const result = await productModel.newProduct(name);
-  console.log(result);
+  
   return { type: null, message: result };
 };
 module.exports = {

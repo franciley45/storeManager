@@ -1,41 +1,29 @@
 const { expect } = require('chai');
 const { stub, restore } = require('sinon')
 const productModel = require('../../../src/models/product.model')
-const mockProduct = require('../mocks/product.model.mocks')
+/* const mockProduct = require('../mocks/product.model.mocks') */
 const connection = require('../../../src/models/DB/connection')
+const { productsList, productById } = require('../mocks/product.model.mocks');
 
-describe('product Model', function () {
-  describe('Lista todos os produtos', function () {
-    beforeEach(function () {
-      stub(connection, 'execute').resolves([mockProduct.productsList])
-      
-   })
 
-    afterEach(function () {
-      restore()
-    })
-    
-    it('com o tipo array', async function () {
-      const response = await productModel.getAllProducts()
-      expect(response).to.be.a('array')
-    })
+describe('produto Model', function () {
+  it('testa se todos os produto retorna', async function () {
+    stub(connection, 'execute').resolves([productsList]);
+    const result = await productModel.getAllProducts();
+    expect(result).to.be.deep.equal(productsList);
+  });
 
-    it('retorno teve sucesso', async function () {
-      const response = await productModel.getAllProducts()
-      expect(response).to.deep.equal(mockProduct.productsList)
-    })
-    describe('lista de produtos por "id"', function () {
-      
-      it('busca por id tipo object', async function () {
-        const response = await productModel.getProductById()
-        expect(response).to.be.a('object')
-      })
+  it('testa se busca produto por Id', async function () {
+    stub(connection, 'execute').resolves([[productsList]]);
+    const result = await productModel.getProductById(1);
+    expect(result).to.be.deep.equal(productsList);
+  });
 
-      it('busca produto por id retorna o object esperado', async function () {
-        const response = await productModel.getProductById(1)
-        expect(response).to.deep.equal({ id: 1, name: 'Martelo de Thor' });
-      })
-    })
-    
-  })
-})
+  it('testa se adicona novo produto', async function () {
+    stub(connection, 'execute').resolves([[productsList]]);
+    const result = await productModel.newProduct('deus');
+    console.log(result)
+    expect(result).to.be.deep.equal(productsList);
+  });
+  afterEach(restore);
+});
