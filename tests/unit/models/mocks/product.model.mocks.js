@@ -1,4 +1,4 @@
-const productsList = [
+const productsListModel = [
   {
     id: 1,
     name: "Martelo de Thor"
@@ -12,12 +12,12 @@ const productsList = [
     name: "Escudo do Capitão América"
   }
 ]
-const productById = {
+const productByIdModel = {
   "id": 1,
   "name": "Martelo de Thor"
 };
 
 module.exports = {
-  productsList,
-  productById,
+  productsListModel,
+  productByIdModel,
 }
