@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { stub, restore } = require('sinon');
 const salestModel = require('../../../src/models/sales.model');
 const salesService = require('../../../src/services/sales.services');
-const { exitInsertSales, prohibitedInsertSales, returncheckIdsservicer } = require('./mocks/sales.services.mocks');
+const { exitInsertSales, prohibitedInsertSales, returncheckIdsservicer, sales } = require('./mocks/sales.services.mocks');
 
 describe('teste sales, Services', function () {
   it('teste da função insertSales ', async function () {
@@ -11,6 +11,13 @@ describe('teste sales, Services', function () {
     expect(result).to.be.deep.equal(exitInsertSales);
   })
   
+  it('Recupera a lista de vendas', async function () {
+    stub(salestModel, 'insert').resolves(sales);
+    const response = { type: null, message: sales }
+    const result = await salesService.insertSales();
+    expect(result).to.be.deep.equal(response);
+  });
+
  /*  it('teste da função checkIds ', async function () {
     stub(salestModel, 'checkIds').resolves(returncheckIdsservicer)
     let gol;
