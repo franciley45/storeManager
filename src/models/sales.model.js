@@ -14,16 +14,13 @@ const insert = async (sale) => {
   connection.execute(
     `INSERT INTO StoreManager.sales_products(sale_id, product_id, quantity) VALUES ${valuesString}`,
   );
-  /* console.log(insertId); */
   return insertId;
 };
 
 const checkIds = async (ids) => {
-  /* console.log(ids); */
   const [results] = await connection.execute(
     `SELECT * FROM StoreManager.products WHERE id IN (${ids.join(', ')})`,
   );
-  /* console.log(results); */
   return results;
 };
 
