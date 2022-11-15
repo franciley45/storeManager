@@ -8,22 +8,28 @@ describe('teste sales, Services', function () {
   it('teste da função insertSales ', async function () {
     stub(salestModel, 'insert').resolves(11)
     const result = await salesService.insertSales(prohibitedInsertSales)
-    expect(result).to.be.deep.equal(exitInsertSales);
+    expect(result).to.be.deep.equal({ type: null, message: exitInsertSales } );
   })
   
-  it('Recupera a lista de vendas', async function () {
+ /*  it('Recupera a lista de vendas', async function () {
     stub(salestModel, 'insert').resolves(sales);
     const response = { type: null, message: sales }
     const result = await salesService.insertSales();
     expect(result).to.be.deep.equal(response);
-  });
-
- /*  it('teste da função checkIds ', async function () {
-    stub(salestModel, 'checkIds').resolves(returncheckIdsservicer)
-    let gol;
-    await salesService.insertSales(prohibitedInsertSales)
-    const result = await salestModel.checkIds([1])
-    const comparacao =  result.length !== 2
-    expect(new Error).to.be.an('error');
-  }) */
+  }); */
 })
+
+/* {
+  id: 11,
+    itemsSold: [
+      {
+        productId: 1,
+        quantity: 1,
+      },
+      {
+        productId: 2,
+        quantity: 5
+      },
+    ]
+},
+type: null, */

@@ -3,10 +3,9 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
-const connection = require('../../../src/models/DB/connection');
 const salesService = require('../../../src/services/sales.services')
 const salesControlles =require('../../../src/controllers/sales.controller');
-const { returnControllerSales, sales } = require('./mocks/sales.controller.mocks');
+const { sales } = require('./mocks/sales.controller.mocks');
 
 
 describe('teste de sales Controllers', function () {
