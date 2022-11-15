@@ -22,6 +22,7 @@ const checkIds = async (ids) => {
   const [results] = await connection.execute(
     `SELECT * FROM StoreManager.products WHERE id IN (${ids.join(', ')})`,
   );
+  console.log(results);
   return results;
 };
 
