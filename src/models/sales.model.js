@@ -38,14 +38,14 @@ const getAllSales = async () => {
   return camelize(result);
 };
 
-const getSalesById = async (_id) => {
+const getSalesById = async (id) => {
   const [result] = await connection.execute(
     `SELECT sales.date, products.product_id AS productId, products.quantity
     FROM sales
      INNER JOIN sales_products AS products
     ON sales.id = products.sale_id
     WHERE (sales.id = (?))`,
-    [1],
+    [id],
   );
   return camelize(result);
 };
