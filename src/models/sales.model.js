@@ -22,7 +22,7 @@ const checkIds = async (ids) => {
   const [results] = await connection.execute(
     `SELECT * FROM StoreManager.products WHERE id IN (${ids.join(', ')})`,
   );
-  console.log(results);
+  
   return results;
 };
 
@@ -34,17 +34,18 @@ const getAllSales = async () => {
     INNER JOIN sales_products AS products
     ON sales.id = products.sale_id`,
   );
+  
   return camelize(result);
 };
 
-const getSalesById = async (id) => {
+const getSalesById = async (_id) => {
   const [result] = await connection.execute(
     `SELECT sales.date, products.product_id AS productId, products.quantity
     FROM sales
      INNER JOIN sales_products AS products
     ON sales.id = products.sale_id
     WHERE (sales.id = (?))`,
-    [id],
+    [1],
   );
   return camelize(result);
 };

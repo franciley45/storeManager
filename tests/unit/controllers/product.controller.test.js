@@ -38,7 +38,7 @@ describe('produto Controller', function () {
     await productController.getProductController(req, res);
 
     expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ type: 404, message: 'Product not found' });
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   }); */
 
   it('busca produto pelo Id', async function () {

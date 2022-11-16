@@ -13,6 +13,13 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(response);
   });
 
+  it('Recuperando a lista de produtos error', async function () {
+    stub(productModel, 'getAllProducts').resolves(undefined);
+    const response = { type: 404, message: 'Product not found' }
+    const result = await productService.getProduct();
+    expect(result).to.be.deep.equal(response);
+  })
+
   it('busca um produto pelo Id', async function () {
     stub(productModel, 'getProductById').resolves(productByIdServices);
     const response = { type: null, message: productByIdServices }

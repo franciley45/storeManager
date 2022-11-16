@@ -9,6 +9,19 @@ const salesModel = [
   },
 ];
 
+const returnGetSalesById = [
+  {
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 1,
+    quantity: 5
+  },
+  {
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 2,
+    quantity: 10
+  }
+]
+
 const returncheckIds = [
   { id: 1, name: 'Martelo de Thor' },
   { id: 2, name: 'Traje de encolhimento' }
@@ -17,4 +30,5 @@ const returncheckIds = [
 module.exports = {
   salesModel,
   returncheckIds,
+  returnGetSalesById,
 };

@@ -8,7 +8,7 @@ const createNewSales = async (req, res) => {
   res.status(201).json(message);
 };
 
-const getAllSalesController = async (req, res) => {
+const getAllSalesController = async (_req, res) => {
   const { type, message } = await salesServices.getAllSalesServices();
 
   if (type) return res.status(type).json({ message });

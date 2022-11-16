@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { stub, restore } = require('sinon')
 const connection = require('../../../src/models/DB/connection');
 const producSales = require('../../../src/models/sales.model');
-const { salesModel, returncheckIds } = require('./mocks/sales.model.mocks');
+const { salesModel, returncheckIds, returnGetSalesById } = require('./mocks/sales.model.mocks');
 
 describe('teste da Sales, Model', function () {
   it('teste da função insert', async function () {
@@ -15,5 +15,19 @@ describe('teste da Sales, Model', function () {
     stub(connection, 'execute').resolves(returncheckIds)
     const result = await producSales.checkIds([1, 2])
     expect(result).to.be.deep.equal(returncheckIds[0]);
+    restore()
+  })
+
+  it('teste da função getAllSales', async function () {
+    stub(connection, 'execute').resolves(salesModel)
+    const result = await producSales.getAllSales()
+    expect(result).to.be.deep.equal(salesModel[0]);
+    restore()
+  })
+
+  it('teste da função getSalesById', async function () {
+    stub(connection, 'execute').resolves(returnGetSalesById)
+    const result = await producSales.getSalesById(1)
+    expect(result).to.be.deep.equal(returnGetSalesById[0]);
   })
 })

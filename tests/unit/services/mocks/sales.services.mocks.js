@@ -14,9 +14,67 @@ const sales = [
   { id: 1, date: '2022-11-12 19:13:50' },
 ];
 
+const returngetAllSales = [
+  {
+    saleId: 1,
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 1,
+    quantity: 5
+  },
+  {
+    saleId: 1,
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 2,
+    quantity: 10
+  },
+]
+
+const allsalesmock = {
+  type: null,
+  message: [
+    {
+      saleId: 1,
+      date: '2022-11-15T21:07:10.000Z',
+      productId: 1,
+      quantity: 5
+    },
+    {
+      saleId: 1,
+      date: '2022-11-15T21:07:10.000Z',
+      productId: 2,
+      quantity: 10
+    }
+  ]
+}
+
+const returnGetSalesByIdSevices = [
+  {
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 1,
+    quantity: 5
+  },
+  {
+    date: "2022-11-15T21:07:10.000Z",
+    productId: 2,
+    quantity: 10
+  }
+]
+
+const mockIdServices = {
+  type: null,
+  message: [
+    { date: '2022-11-15T21:07:10.000Z', productId: 1, quantity: 5 },
+    { date: '2022-11-15T21:07:10.000Z', productId: 2, quantity: 10 }
+  ]
+}
+
 module.exports = {
   prohibitedInsertSales,
   exitInsertSales,
   returncheckIdsservicer,
   sales,
+  returngetAllSales,
+  allsalesmock,
+  returnGetSalesByIdSevices,
+  mockIdServices,
 }
