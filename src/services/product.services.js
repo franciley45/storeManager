@@ -24,7 +24,7 @@ const newProductServices = async (name) => {
 
 const updateProductServices = async (id, name) => {
   const result = await productModel.checkIdProduct(id);
-  console.log(result);
+  
   if (result.length === 0) return { type: 404, message: 'Product not found' };
 
   await productModel.updateProduct(id, name);
