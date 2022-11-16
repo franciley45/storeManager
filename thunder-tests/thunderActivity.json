@@ -18,16 +18,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products/",
-    "url": "http://localhost:3000/products/",
-    "method": "GET",
+    "url": "http://localhost:3000/products/1",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2022-11-11T21:54:33.620Z",
-    "modified": "2022-11-15T19:09:11.116Z",
+    "modified": "2022-11-16T20:13:42.829Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"name\": \"senho amado\"\n}",
+      "raw": "{\n  \"name\": \"Mart\"\n}",
       "form": []
     },
     "tests": []

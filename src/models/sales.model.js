@@ -49,9 +49,11 @@ const getSalesById = async (id) => {
   );
   return camelize(result);
 };
+
 module.exports = {
   insert,
   checkIds,
   getAllSales,
   getSalesById,
+  
 };
