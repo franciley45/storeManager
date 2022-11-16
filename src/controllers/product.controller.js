@@ -28,6 +28,7 @@ const newProductController = async (req, res) => {
 
 const updateProductController = async (req, res) => {
   const { id } = req.params;
+  
   const { name } = req.body;
 
   const { type, message } = await productService.updateProductServices(id, name);
