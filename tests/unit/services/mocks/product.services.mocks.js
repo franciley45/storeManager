@@ -13,14 +13,17 @@ const productsListServices = [
   }
 ]
 const productByIdServices = {
-  "id": 1,
-  "name": "Martelo de Thor"
+  id: 1,
+  name: "Martelo de Thor"
 };
 
-const newProductmock = { id: 10, name:'deus'}
+const newProductmock = { id: 10, name: 'deus' }
+
+const updatemock = { type: null, message: { id: 1, name: 'Martelo de Thor' } }
 
 module.exports = {
   productsListServices,
   productByIdServices,
   newProductmock,
+  updatemock,
 }

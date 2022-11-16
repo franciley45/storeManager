@@ -101,5 +101,35 @@ describe('produto Controller', function () {
     expect(res.json).to.have.been.calledWith({ message: 'error to add product' });
   });
 
+  it('retorno ao editar produto', async function () {
+    sinon.stub(productService, 'updateProductServices').resolves({ type: null, message: productByIdController });
+  
+      const req = { params: { id: 1 }, body: { name: "Martelo de Thor" } };
+  
+      const res = {};
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+  
+      await productController.updateProductController(req, res);
+  
+      expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(productByIdController);
+  });
+  
+  it('retorno ao editar produto error', async function () {
+    sinon.stub(productService, 'updateProductServices').resolves({ type: 404, message: 'Product not found' });
+
+    const req = { params: { id: 1 }, body: { name: "Martelo de Thor" } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.updateProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
   afterEach(sinon.restore);
 });

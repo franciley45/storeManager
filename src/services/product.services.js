@@ -28,7 +28,7 @@ const updateProductServices = async (id, name) => {
   if (result.length === 0) return { type: 404, message: 'Product not found' };
 
   await productModel.updateProduct(id, name);
-
+ 
   return { type: null, message: { id, name } };
  };
 module.exports = {

@@ -13,8 +13,8 @@ const productsListController = [
   }
 ]
 const productByIdController = {
-  "id": 1,
-  "name": "Martelo de Thor"
+  id: 1,
+  name: "Martelo de Thor"
 };
 
 module.exports = {

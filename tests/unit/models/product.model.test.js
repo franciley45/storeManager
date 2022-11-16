@@ -23,5 +23,17 @@ describe('produto Model', function () {
     const { id } = await productModel.newProduct('deus');
     expect(id).to.be.deep.equal(10);
   });
+
+  it('testa de update Product', async function () {
+    stub(connection, 'execute').resolves(undefined);
+    const result = await productModel.updateProduct(1,'deus');
+    expect(result).to.be.deep.equal(undefined);
+  });
+
+  it('testa da função checkIdProduct', async function () {
+    stub(connection, 'execute').resolves([[{ id: 1 }]]);
+    const result = await productModel.checkIdProduct(1);
+    expect(result).to.be.deep.equal([{ id: 1 }]);
+  });
   afterEach(restore);
 });
