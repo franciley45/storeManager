@@ -82,6 +82,13 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(response);
   });
 
+   /* it('retorno update produto', async function () {
+    stub(productModel, 'deleteProduct').resolves(undefined);
+     const response = { type: 404, message: 'Product not found' }
+    const result = await productService.deleteProductServices(1);
+    expect(result).to.be.deep.equal(response);
+  }); */
+
   afterEach(restore);
 });
 

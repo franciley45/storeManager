@@ -13,7 +13,7 @@ describe('teste sales, Services', function () {
     restore()
   })
 
- /*  it('teste da função insertSales ', async function () {
+ /*  it('teste da função insertSales error ', async function () {
     stub(salestModel, 'insert').resolves(11)
     const result = await salesService.insertSales(prohibitedInsertSales)
     expect(result).to.be.deep.equal({ type: 404, message: 'Product not found' });
@@ -45,5 +45,22 @@ describe('teste sales, Services', function () {
     expect(result).to.be.deep.equal({ type: 404, message: 'Sale not found' });
     restore()
   })
+
+  it('teste da função checkIdSales error dentro função deleteSales', async function () {
+    stub(salestModel, 'checkIdSales').resolves([]);
+    const response = { type: 404, message: 'Sale not found' }
+    const result = await salesService.deleteSalesServices(1);
+    expect(result).to.be.deep.equal(response);
+    restore()
+  });
+
+  it('retorno delete Sales', async function () {
+    stub(salestModel, 'checkIdSales').resolves([1]);
+    const response = { type: null }
+    const result = await salesService.deleteSalesServices(1);
+    console.log(result)
+    expect(result).to.be.deep.equal(response);
+
+  });
 
 })

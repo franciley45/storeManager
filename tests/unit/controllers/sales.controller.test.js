@@ -104,4 +104,36 @@ describe('teste de sales Controllers', function () {
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
     sinon.restore()
   });
+
+  it('retorno ao deletar sales error', async function () {
+    sinon.stub(salesService, 'deleteSalesServices').resolves({ type: 404, message: "Sale not found" });
+
+    const req = { params: { id: 1 } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesControlles.deleteSalesController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: "Sale not found" });
+    sinon.restore()
+  });
+
+  it('retorno ao deletar sales', async function () {
+    sinon.stub(salesService, 'deleteSalesServices').resolves({ type: null });
+
+    const req = { params: { id: 1 } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesControlles.deleteSalesController(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith();
+    sinon.restore()
+  });
 })

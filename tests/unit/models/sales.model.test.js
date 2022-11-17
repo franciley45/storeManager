@@ -29,5 +29,21 @@ describe('teste da Sales, Model', function () {
     stub(connection, 'execute').resolves(returnGetSalesById)
     const result = await producSales.getSalesById(1)
     expect(result).to.be.deep.equal(returnGetSalesById[0]);
+    restore()
   })
+
+  it('testa da função checkIdProduct', async function () {
+    stub(connection, 'execute').resolves([{ id: 1 }]);
+    const result = await producSales.checkIdSales(1);
+    expect(result).to.be.deep.equal({ id: 1 });
+    restore()
+  });
+
+  it('testa de delete Sales', async function () {
+    stub(connection, 'execute').resolves(undefined);
+    const result = await producSales.deleteSales(1);
+    expect(result).to.be.deep.equal(undefined);
+    restore()
+  })
+  
 })
