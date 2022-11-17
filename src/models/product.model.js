@@ -34,13 +34,21 @@ const checkIdProduct = async (id) => {
   const [result] = await connection.execute(
     'SELECT products.id FROM StoreManager.products WHERE (id = (?))', [id],
   );
+  
   return result;
 };
 
+const deleteProduct = async (id) => {
+  await connection.execute(
+    'DELETE FROM StoreManager.products WHERE id = ?',
+    [id],
+  );
+};
 module.exports = {
   getAllProducts,
   getProductById,
   newProduct,
   updateProduct,
   checkIdProduct,
+  deleteProduct,
 };

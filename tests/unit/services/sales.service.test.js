@@ -12,6 +12,14 @@ describe('teste sales, Services', function () {
     expect(result).to.be.deep.equal({ type: null, message: exitInsertSales });
     restore()
   })
+
+ /*  it('teste da função insertSales ', async function () {
+    stub(salestModel, 'insert').resolves(11)
+    const result = await salesService.insertSales(prohibitedInsertSales)
+    expect(result).to.be.deep.equal({ type: 404, message: 'Product not found' });
+    restore()
+  }) */
+
   it('teste da função checkIds ', async function () {
     stub(salestModel, 'checkIds').resolves(30)
     const result = await await salesService.insertSales(prohibitedInsertSales)

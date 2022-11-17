@@ -131,5 +131,35 @@ describe('produto Controller', function () {
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
   });
 
+  it('retorno ao deletar produto error', async function () {
+    sinon.stub(productService, 'deleteProductServices').resolves({ type: 404, message: 'Product not found' });
+
+    const req = { params: { id: 1 } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.deleteProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+  });
+
+  it('retorno ao deletar produto', async function () {
+    sinon.stub(productService, 'deleteProductServices').resolves({ type: null });
+
+    const req = { params: { id: 1 } };
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.deleteProductController(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+    expect(res.json).to.have.been.calledWith();
+  });
+
   afterEach(sinon.restore);
 });

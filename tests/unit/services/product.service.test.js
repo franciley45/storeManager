@@ -47,6 +47,13 @@ describe('produto Services', function () {
     const result = await productService.updateProductServices(1, productByIdServices.name);
     expect(result).to.be.deep.equal(response);
   });
+  
+  /* it('retorno ao editar produto error', async function () {
+    stub(productModel, 'updateProduct').resolves(undefined);
+    const response = { type: 404, message: "Product not found" }
+    const result = await productService.updateProductServices(1, productByIdServices.name);
+    expect(result).to.be.deep.equal(response);
+  }); */
 
   it('teste da função checkIdProduct', async function () {
     stub(productModel, 'checkIdProduct').resolves([{ id: 1 }]);
@@ -54,10 +61,24 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(updatemock);
   });
 
-  it('teste da função checkIdProduct error', async function () {
+  it('teste da função checkIdProduct error dentro função updateProductServices', async function () {
     stub(productModel, 'checkIdProduct').resolves([]);
     const response = { type: 404, message: 'Product not found' }
     const result = await productService.updateProductServices(1, productByIdServices.name);
+    expect(result).to.be.deep.equal(response);
+  });
+
+  it('teste da função checkIdProduct error dentro função deleteProductServices', async function () {
+    stub(productModel, 'checkIdProduct').resolves([]);
+    const response = { type: 404, message: 'Product not found' }
+    const result = await productService.deleteProductServices(1);
+    expect(result).to.be.deep.equal(response);
+  });
+
+  it('retorno update produto', async function () {
+    stub(productModel, 'deleteProduct').resolves(undefined);
+    const response = { type: null }
+    const result = await productService.deleteProductServices(1);
     expect(result).to.be.deep.equal(response);
   });
 

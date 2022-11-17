@@ -31,9 +31,16 @@ describe('produto Model', function () {
   });
 
   it('testa da função checkIdProduct', async function () {
-    stub(connection, 'execute').resolves([[{ id: 1 }]]);
+    stub(connection, 'execute').resolves([{ id: 1 }]);
     const result = await productModel.checkIdProduct(1);
-    expect(result).to.be.deep.equal([{ id: 1 }]);
+    expect(result).to.be.deep.equal({ id: 1 });
   });
+
+  it('testa de delete Product', async function () {
+    stub(connection, 'execute').resolves(undefined);
+    const result = await productModel.deleteProduct(1);
+    expect(result).to.be.deep.equal(undefined);
+  })
+
   afterEach(restore);
 });
