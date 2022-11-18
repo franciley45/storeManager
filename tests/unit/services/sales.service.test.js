@@ -60,7 +60,32 @@ describe('teste sales, Services', function () {
     const result = await salesService.deleteSalesServices(1);
     console.log(result)
     expect(result).to.be.deep.equal(response);
+    restore()
+  });
 
+  it('teste da função checkIdSales error dentro função updateSalesServices', async function () {
+    stub(salestModel, 'checkIdSales').resolves([]);
+    const response = { type: 404, message: 'Sale not found' }
+    const result = await salesService.updateSalesServices(1, prohibitedInsertSales);
+    expect(result).to.be.deep.equal(response);
+    restore()
+  });
+  /* const response = { saleId: 1, itemsUpdated: prohibitedInsertSales }; */
+  it('teste da função updateSales dentro função updateSalesServices', async function () {
+    stub(salestModel, 'checkIdSales').resolves([1, 2]);
+    stub(salestModel, 'updateSales').resolves(undefined);
+    const response = { type: 404, message: 'Sale not found' }
+    const result = await salesService.updateSalesServices(1, prohibitedInsertSales);
+    expect(result).to.be.deep.equal(response);
+    restore()
+  });
+
+  it('teste da função checkIds error dentro função updateSalesServices', async function () {
+    stub(salestModel, 'checkIds').resolves([]);
+    const response = { type: 404, message: 'Product not found' }
+    const result = await salesService.updateSalesServices(1, prohibitedInsertSales);
+    expect(result).to.be.deep.equal(response);
+    restore()
   });
 
 })

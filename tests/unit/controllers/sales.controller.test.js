@@ -5,7 +5,7 @@ const sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 const salesService = require('../../../src/services/sales.services')
 const salesControlles =require('../../../src/controllers/sales.controller');
-const { sales, getAllSalesServices, mockssales, } = require('./mocks/sales.controller.mocks');
+const { sales, getAllSalesServices, mockssales, returnControllerSales, returnUpdateSales, } = require('./mocks/sales.controller.mocks');
 
 
 describe('teste de sales Controllers', function () {
@@ -134,6 +134,38 @@ describe('teste de sales Controllers', function () {
 
     expect(res.status).to.have.been.calledWith(204);
     expect(res.json).to.have.been.calledWith();
+    sinon.restore()
+  });
+
+  it('retorno ao update Sales sales error', async function () {
+    sinon.stub(salesService, 'updateSalesServices').resolves({ type: 404, message: "Sale not found" });
+
+    const req = { params: { id: 1 }, body: returnControllerSales }
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesControlles.updateSalesController(req, res);
+
+    expect(res.status).to.have.been.calledWith(404);
+    expect(res.json).to.have.been.calledWith({ message: "Sale not found" });
+    sinon.restore()
+  });
+
+  it('retorno ao update Sales sales error', async function () {
+    sinon.stub(salesService, 'updateSalesServices').resolves({ type:null, message: returnUpdateSales });
+
+    const req = { params: { id: 1 }, body: returnControllerSales }
+
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await salesControlles.updateSalesController(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith({ message: returnUpdateSales });
     sinon.restore()
   });
 })

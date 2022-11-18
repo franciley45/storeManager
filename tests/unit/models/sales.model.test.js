@@ -4,7 +4,7 @@ const connection = require('../../../src/models/DB/connection');
 const producSales = require('../../../src/models/sales.model');
 const { salesModel, returncheckIds, returnGetSalesById } = require('./mocks/sales.model.mocks');
 
-describe('teste da Sales, Model', function () {
+describe('teste de Sales, Model', function () {
   it('teste da função insert', async function () {
     stub(connection, 'execute').resolves([{ insertId:10 }])
     const result = await producSales.insert(salesModel)
@@ -42,6 +42,13 @@ describe('teste da Sales, Model', function () {
   it('testa de delete Sales', async function () {
     stub(connection, 'execute').resolves(undefined);
     const result = await producSales.deleteSales(1);
+    expect(result).to.be.deep.equal(undefined);
+    restore()
+  })
+
+  it('testa de updateSales Sales', async function () {
+    stub(connection, 'execute').resolves(undefined);
+    const result = await producSales.updateSales(1, 1, 10);
     expect(result).to.be.deep.equal(undefined);
     restore()
   })
