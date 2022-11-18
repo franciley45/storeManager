@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { stub, restore } = require('sinon');
 const salestModel = require('../../../src/models/sales.model');
 const salesService = require('../../../src/services/sales.services');
-const { exitInsertSales, prohibitedInsertSales, returncheckIdsservicer, sales, returngetAllSales, allsalesmock, returnGetSalesByIdSevices, mockIdServices
+const { exitInsertSales, prohibitedInsertSales, returncheckIdsservicer, sales, returngetAllSales, allsalesmock, returnGetSalesByIdSevices, mockIdServices, mockupdateSalesServices
 } = require('./mocks/sales.services.mocks');
 
 describe('teste sales, Services', function () {
@@ -74,9 +74,8 @@ describe('teste sales, Services', function () {
   it('teste da função updateSales dentro função updateSalesServices', async function () {
     stub(salestModel, 'checkIdSales').resolves([1, 2]);
     stub(salestModel, 'updateSales').resolves(undefined);
-    const response = { type: 404, message: 'Sale not found' }
-    const result = await salesService.updateSalesServices(1, prohibitedInsertSales);
-    expect(result).to.be.deep.equal(response);
+    const { message: { itemsUpdated } }  = await salesService.updateSalesServices(1, prohibitedInsertSales);
+    expect(itemsUpdated).to.be.deep.equal(mockupdateSalesServices);
     restore()
   });
 

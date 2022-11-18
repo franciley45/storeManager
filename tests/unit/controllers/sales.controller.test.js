@@ -165,7 +165,7 @@ describe('teste de sales Controllers', function () {
     await salesControlles.updateSalesController(req, res);
 
     expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith({ message: returnUpdateSales });
+    expect(res.json).to.have.been.calledWith(returnUpdateSales);
     sinon.restore()
   });
 })
