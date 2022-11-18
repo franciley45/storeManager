@@ -20,7 +20,6 @@ const mockssales = [
   { date: '2022-11-15T23:13:07.000Z', productId: 1, quantity: 5 },
   { date: '2022-11-15T23:13:07.000Z', productId: 2, quantity: 10 }
 ]
-
 const returnUpdateSales = {
   saleId: 2,
   itemsUpdated: [
