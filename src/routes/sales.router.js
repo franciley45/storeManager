@@ -12,4 +12,7 @@ salesRouter.get('/:id', salesController.getSalesByIdController);
 
 salesRouter.delete('/:id', salesController.deleteSalesController);
 
+salesRouter.put('/:id',
+  validationsales, salesController.updateSalesController);
+
 module.exports = salesRouter;
