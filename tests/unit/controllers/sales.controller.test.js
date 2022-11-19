@@ -153,7 +153,7 @@ describe('teste de sales Controllers', function () {
     sinon.restore()
   });
 
-  it('retorno ao update Sales sales error', async function () {
+  it('retorno ao update Sales sales', async function () {
     sinon.stub(salesService, 'updateSalesServices').resolves({ type:null, message: returnUpdateSales });
 
     const req = { params: { id: 1 }, body: returnControllerSales }

@@ -89,6 +89,21 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(response);
   }); */
 
+  it('retorno getAllProductsByIncludes  se tudo de certo', async function () {
+    stub(productModel, 'getAllProducts').resolves(productsListServices);
+
+    const response = { type: null, message: [{ id: 1, name: 'Martelo de Thor' }] }
+    const result  = await productService.getAllProductsByIncludes('Martelo');
+    expect(result).to.be.deep.equal(response);
+  });
+
+  it('retorno getAllProductsByIncludes  se não encontra a busca pelo nome', async function () {
+    stub(productModel, 'getAllProducts').resolves([]);
+    const response = { type: 200, message: [] }
+    const result = await productService.getAllProductsByIncludes('deus');
+    expect(result).to.be.deep.equal(response);
+  })
+
   afterEach(restore);
 });
 

@@ -26,8 +26,8 @@ describe('produto Controller', function () {
     expect(res.json).to.have.been.calledWith(productsListController);
   });
 
-  /* it('busca todos produtos error', async function () {
-    sinon.stub(productService, 'getProduct').resolves({ type: 404, message: 'Product not found' });
+  it('busca todos produtos error', async function () {
+    sinon.stub(productService, 'getProduct').resolves({ type: 404 });
 
     const req = {};
 
@@ -38,8 +38,8 @@ describe('produto Controller', function () {
     await productController.getProductController(req, res);
 
     expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  }); */
+    expect(res.json).to.have.been.calledWith();
+  });
 
   it('busca produto pelo Id', async function () {
     sinon.stub(productService, 'getProductByIdServices').resolves({ type: null, message: productByIdController });
@@ -159,6 +159,34 @@ describe('produto Controller', function () {
 
     expect(res.status).to.have.been.calledWith(204);
     expect(res.json).to.have.been.calledWith();
+  });
+
+  it('retorno busca por produto via Includes', async function () {
+    sinon.stub(productService, 'getAllProductsByIncludes').resolves({ type: 200, message: [{ id: 1, name: 'Martelo de Thor' }] });
+
+    const req = { query: { q: 'Martelo' } };
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.getAllProductsByIncludes(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    /* expect(res.json).to.have.been.calledWith({ message: [{ id: 1, name: 'Martelo de Thor' }] }); */
+  });
+
+  it('retorno busca por produto via Includes não encontrando nome', async function () {
+    sinon.stub(productService, 'getAllProductsByIncludes').resolves({ type: null, message: productsListController });
+
+    const req = { query: { q: 'fff' } };
+    const res = {};
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.getAllProductsByIncludes(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+   /*  expect(res.json).to.have.been.calledWith({ message: productsListController }); */
   });
 
   afterEach(sinon.restore);

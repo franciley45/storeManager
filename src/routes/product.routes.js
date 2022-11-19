@@ -6,6 +6,8 @@ const productRouter = express.Router();
 
 productRouter.get('/', productController.getProductController);
 
+productRouter.get('/search', productController.getAllProductsByIncludes);
+
 productRouter.get('/:id', productController.getProductByIdController);
 
 productRouter.post('/', validationProduct, productController.newProductController);

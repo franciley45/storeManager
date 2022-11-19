@@ -5,7 +5,7 @@ const salesService = require('../../../src/services/sales.services');
 const { exitInsertSales, prohibitedInsertSales, returncheckIdsservicer, sales, returngetAllSales, allsalesmock, returnGetSalesByIdSevices, mockIdServices, mockupdateSalesServices
 } = require('./mocks/sales.services.mocks');
 
-describe('teste sales, Services', function () {
+describe('teste de sales, Services', function () {
   it('teste da função insertSales ', async function () {
     stub(salestModel, 'insert').resolves(11)
     const result = await salesService.insertSales(prohibitedInsertSales)
@@ -58,7 +58,6 @@ describe('teste sales, Services', function () {
     stub(salestModel, 'checkIdSales').resolves([1]);
     const response = { type: null }
     const result = await salesService.deleteSalesServices(1);
-    console.log(result)
     expect(result).to.be.deep.equal(response);
     restore()
   });
@@ -70,7 +69,7 @@ describe('teste sales, Services', function () {
     expect(result).to.be.deep.equal(response);
     restore()
   });
-  /* const response = { saleId: 1, itemsUpdated: prohibitedInsertSales }; */
+  
   it('teste da função updateSales dentro função updateSalesServices', async function () {
     stub(salestModel, 'checkIdSales').resolves([1, 2]);
     stub(salestModel, 'updateSales').resolves(undefined);

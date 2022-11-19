@@ -48,10 +48,21 @@ const deleteProductController = async (req, res) => {
   res.status(204).json();
 };
 
+const getAllProductsByIncludes = async (req, res) => {
+  const { q } = req.query;
+  
+  const { type, message } = await productService.getAllProductsByIncludes(q);
+  
+  if (type) return res.status(type).json({ message });
+
+  res.status(200).json(message);
+};
+
 module.exports = {
   getProductController,
   getProductByIdController,
   newProductController,
   updateProductController,
   deleteProductController,
+  getAllProductsByIncludes,
 };

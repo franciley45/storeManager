@@ -42,10 +42,21 @@ const deleteProductServices = async (id) => {
   return { type: null };
 };
 
+const getAllProductsByIncludes = async (q) => {
+  const AllProducts = await productModel.getAllProducts();
+  
+  if (AllProducts.length === 0) return { type: 200, message: AllProducts };
+  
+  const ProductsList = await AllProducts.filter((e) => e.name.includes(q));
+
+  return { type: null, message: ProductsList };
+};
+
 module.exports = {
   getProduct,
   getProductByIdServices,
   newProductServices,
   updateProductServices,
   deleteProductServices,
+  getAllProductsByIncludes,
 };
