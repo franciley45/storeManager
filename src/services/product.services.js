@@ -25,9 +25,9 @@ const newProductServices = async (name) => {
 const updateProductServices = async (id, name) => {
   const result = await productModel.checkIdProduct(id);
   
-  if (result.length === 0) return { type: 404, message: 'Product not found' };
-
   await productModel.updateProduct(id, name);
+
+  if (result.length === 0) return { type: 404, message: 'Product not found' };
  
   return { type: null, message: { id, name } };
 };
@@ -35,9 +35,9 @@ const updateProductServices = async (id, name) => {
 const deleteProductServices = async (id) => {
   const result = await productModel.checkIdProduct(id);
 
-  if (result.length === 0) return { type: 404, message: 'Product not found' };
-
   await productModel.deleteProduct(id); 
+  
+  if (result.length === 0) return { type: 404, message: 'Product not found' };
 
   return { type: null };
 };

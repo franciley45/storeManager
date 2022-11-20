@@ -41,53 +41,37 @@ describe('produto Services', function () {
     expect(result).to.be.deep.equal(response);
   });
 
-  it('retorno ao editar produto', async function () {
+  it('retorno ao editar produto full', async function () {
+    stub(productModel, 'checkIdProduct').resolves([1, 2]);
     stub(productModel, 'updateProduct').resolves(undefined);
     const response = { type: null, message: productByIdServices }
     const result = await productService.updateProductServices(1, productByIdServices.name);
     expect(result).to.be.deep.equal(response);
   });
-  
-  /* it('retorno ao editar produto error', async function () {
+
+  it('retorno ao editar produto, msg Product not found full', async function () {
+    stub(productModel, 'checkIdProduct').resolves([]);
     stub(productModel, 'updateProduct').resolves(undefined);
-    const response = { type: 404, message: "Product not found" }
-    const result = await productService.updateProductServices(1, productByIdServices.name);
-    expect(result).to.be.deep.equal(response);
-  }); */
-
-  it('teste da função checkIdProduct', async function () {
-    stub(productModel, 'checkIdProduct').resolves([{ id: 1 }]);
-    const result = await productService.updateProductServices(1, productByIdServices.name);
-    expect(result).to.be.deep.equal(updatemock);
-  });
-
-  it('teste da função checkIdProduct error dentro função updateProductServices', async function () {
-    stub(productModel, 'checkIdProduct').resolves([]);
     const response = { type: 404, message: 'Product not found' }
     const result = await productService.updateProductServices(1, productByIdServices.name);
     expect(result).to.be.deep.equal(response);
   });
-
-  it('teste da função checkIdProduct error dentro função deleteProductServices', async function () {
-    stub(productModel, 'checkIdProduct').resolves([]);
-    const response = { type: 404, message: 'Product not found' }
-    const result = await productService.deleteProductServices(1);
-    expect(result).to.be.deep.equal(response);
-  });
-
+  
   it('retorno update produto', async function () {
+    stub(productModel, 'checkIdProduct').resolves([1, 2]);
     stub(productModel, 'deleteProduct').resolves(undefined);
     const response = { type: null }
     const result = await productService.deleteProductServices(1);
     expect(result).to.be.deep.equal(response);
   });
 
-   /* it('retorno update produto', async function () {
+  it('retorno update produto Product not found full', async function () {
+    stub(productModel, 'checkIdProduct').resolves([]);
     stub(productModel, 'deleteProduct').resolves(undefined);
-     const response = { type: 404, message: 'Product not found' }
+    const response = { type: 404, message: 'Product not found' }
     const result = await productService.deleteProductServices(1);
     expect(result).to.be.deep.equal(response);
-  }); */
+  });
 
   it('retorno getAllProductsByIncludes  se tudo de certo', async function () {
     stub(productModel, 'getAllProducts').resolves(productsListServices);
@@ -106,5 +90,3 @@ describe('produto Services', function () {
 
   afterEach(restore);
 });
-
-
